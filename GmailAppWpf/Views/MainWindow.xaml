@@ -1,0 +1,40 @@
+﻿<Window x:Class="GmailAppWpf.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:GmailAppWpf.Views"
+        mc:Ignorable="d"
+        Title="Gmail" Height="450" Width="1000">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Background="#F1F3F4" Width="250">
+        
+            <Image Source="../gmail.png" Width="100px" Margin="0,10"/>
+
+            <!-- Compose Button -->
+            <Button Content="Compose" Height="40" Margin="0,10" 
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
+                    Background="#1A73E8" Foreground="White" />
+
+            <!-- Menu Items -->
+            <ListBox Background="Transparent" BorderThickness="0" 
+                 ItemsSource="{Binding MenuItems}" 
+                 SelectedItem="{Binding SelectedMenuItem, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="{Binding Icon}" Margin="0,0,10,0" />
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" Grid.Column="1"/>
+    </Grid>
+</Window>
